@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 // Importa o Model Produto
 use App\Models\Produto;
 
+
 // Importa a classe Request para receber dados dos formulários
 use Illuminate\Http\Request;
 
