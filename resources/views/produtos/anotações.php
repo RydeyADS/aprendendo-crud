@@ -11,3 +11,5 @@ Banco de Dados      -->//Armazena os dados dos produtos.\\
 View Blade          -->//Exibe a interface para o usuário, mostrando os produtos.\\
     ↓
 Usuário
+
+Anotações: method="POST" é o que informa ao navegador como os dados serão enviados para o servidor.

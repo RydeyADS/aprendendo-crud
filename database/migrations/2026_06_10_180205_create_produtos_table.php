@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    
+
     /**
      * Executado quando rodamos:
      * php artisan migrate
@@ -43,10 +43,12 @@ return new class extends Migration
 
             // data de criação e de atualização
             $table->timestamps();
+
+            $table->softDeletes();
         });
     }
 
-    
+
      /**
      * Executado quando rodamos:
      * php artisan migrate:rollback
