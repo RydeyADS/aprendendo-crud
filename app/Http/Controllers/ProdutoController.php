@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 // Controller responsável pelas operações do CRUD de Produtos
 class ProdutoController extends Controller
 {
-   
+
     /**
      * LISTAR PRODUTOS
      *
@@ -31,7 +31,7 @@ class ProdutoController extends Controller
 
 }
 
-  
+
      /**
      * FORMULÁRIO DE CADASTRO
      *
@@ -45,22 +45,32 @@ class ProdutoController extends Controller
     return view('produtos.create');
 }
 
-   
+
     /**
      * SALVAR PRODUTO
      *
      * Recebe os dados enviados pelo formulário create.
      */
-    public function store(Request $request)
-{
-    // Cria um novo produto no banco com os dados do formulário
-    Produto::create($request->all());
 
-       // Retorna para a listagem de produtos
+    // Criação do produto no banco
+public function store(Request $request)
+{
+    $data = $request->validate([
+        'marca' => 'required',
+        'modelo' => 'required',
+        'cor' => 'required',
+        'memoria_ram' => 'required|numeric',
+        'armazenamento' => 'required|numeric',
+        'imei' => 'required|unique:produtos',
+        'estado' => 'required',
+        'estoque' => 'required|numeric',
+    ]);
+
+    Produto::create($data);
+
     return redirect()->route('produtos.index');
 }
-   
-   
+
 
 /**
      * FORMULÁRIO DE EDIÇÃO
@@ -81,17 +91,34 @@ class ProdutoController extends Controller
      * Recebe os novos dados do formulário
      * e atualiza o registro no banco.
      */
-    public function update(Request $request, Produto $produto)
+public function update(Request $request, Produto $produto)
 {
+    $request->validate([
+        'marca' => 'required',
+        'modelo' => 'required',
+        'cor' => 'required',
+        'memoria_ram' => 'required|numeric',
+        'armazenamento' => 'required|numeric',
+        'imei' => 'required|unique:produtos,imei,' . $produto->id,
+        'estado' => 'required',
+        'quantidade' => 'required|numeric',
+        'estoque' => 'required|numeric',
+    ]);
 
-     // Atualiza os dados do produto com os dados do formulário
-    $produto->update($request->all());
+    $produto->update($request->only([
+        'marca',
+        'modelo',
+        'cor',
+        'memoria_ram',
+        'armazenamento',
+        'imei',
+        'estado',
+        'quantidade',
+        'estoque',
+    ]));
 
-     // Volta para a listagem de produtos
     return redirect()->route('produtos.index');
-
 }
-
 
 
  /**
@@ -113,14 +140,10 @@ public function show(Produto $produto)
      *
      * Remove o produto do banco.
      */
-    public function destroy(Produto $produto)
+public function destroy(Produto $produto)
 {
-
-    // Exclui o produto do banco
     $produto->delete();
-
-    // Volta para a listagem de produtos
-    return redirect()->route('produtos.index');
+    return back();
 }
 
 }

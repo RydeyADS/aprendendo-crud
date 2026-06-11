@@ -16,5 +16,15 @@ class Produto extends Model
      *
      * Segurança contra Mass Assignment.
      */
-    protected $fillable = ['nome', 'preco', 'quantidade'];
+    protected $fillable = [
+        'marca',
+        'modelo',
+        'cor',
+        'memoria_ram',
+        'armazenamento',
+        'imei',
+        'estado',
+        'estoque',
+
+        ];
 }

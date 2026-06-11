@@ -13,3 +13,7 @@ View Blade          -->//Exibe a interface para o usuário, mostrando os produto
 Usuário
 
 Anotações: method="POST" é o que informa ao navegador como os dados serão enviados para o servidor.
+
+
+
+

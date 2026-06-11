@@ -4,35 +4,65 @@
     Cadastrar Produto
 </a>
 
-<hr>
+@if ($produtos->count() > 0)
 
-@foreach ($produtos as $produto)
+    @foreach ($produtos as $produto)
 
-    <p>
-        <strong>{{ $produto->nome }}</strong>
-    </p>
 
-    <p>
-        Preço: R$ {{ number_format($produto->preco, 2, ',', '.') }}
-    </p>
+            <p>
+                <strong>{{ $produto->marca }} {{ $produto->modelo }}</strong>
+            </p>
 
-    <p>
-        Quantidade em estoque: {{ $produto->quantidade }}
-    </p>
+            <p>
+                Cor: {{ $produto->cor }}
+            </p>
 
-    <a href="{{ route('produtos.edit', $produto) }}">
-        Editar
-    </a>
+            <p>
+                IMEI: {{ $produto->imei }}
+            </p>
 
-    <form action="{{ route('produtos.destroy', $produto) }}" method="POST">
-        @csrf
-        @method('DELETE')
+            <p>
+                Memória RAM: {{ $produto->memoria_ram }} GB
+            </p>
 
-        <button type="submit">
-            Excluir
-        </button>
-    </form>
+            <p>
+                Armazenamento: {{ $produto->armazenamento }} GB
+            </p>
 
-    <hr>
+            <p>
+                Estado: {{ $produto->estado }}
+            </p>
 
-@endforeach
+            <p>
+                Estoque: <strong>{{ $produto->quantidade }}</strong>
+            </p>
+
+            <hr>
+
+            <a href="{{ route('produtos.show', $produto) }}">
+                Ver detalhes
+            </a>
+
+            <a href="{{ route('produtos.edit', $produto) }}">
+                Editar
+            </a>
+
+            <form action="{{ route('produtos.destroy', $produto) }}" method="POST" style="display:inline;">
+                @csrf
+                @method('DELETE')
+
+                <button type="submit" onclick="return confirm('Tem certeza que deseja excluir este produto?')">
+                    Excluir
+                </button>
+                <br><a href="{{ route('produtos.index') }}">Voltar</a>
+
+
+            </form>
+
+    @endforeach
+
+@else
+
+    <p>Nenhum produto cadastrado.</p>
+
+@endif
