@@ -101,23 +101,23 @@ public function update(Request $request, Produto $produto)
         'armazenamento' => 'required|numeric',
         'imei' => 'required|unique:produtos,imei,' . $produto->id,
         'estado' => 'required',
-        'quantidade' => 'required|numeric',
         'estoque' => 'required|numeric',
     ]);
 
-    $produto->update($request->only([
-        'marca',
-        'modelo',
-        'cor',
-        'memoria_ram',
-        'armazenamento',
-        'imei',
-        'estado',
-        'quantidade',
-        'estoque',
-    ]));
+   $produto->update($request->only([
+    'marca',
+    'modelo',
+    'cor',
+    'memoria_ram',
+    'armazenamento',
+    'imei',
+    'estado',
+    'estoque',
+]));
 
-    return redirect()->route('produtos.index');
+return redirect()
+    ->route('produtos.index')
+    ->with('success', 'Produto atualizado com sucesso!');
 }
 
 

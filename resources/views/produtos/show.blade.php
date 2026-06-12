@@ -16,16 +16,8 @@
 
 <p><strong>Estado:</strong> {{ $produto->estado }}</p>
 
-<p><strong>Preço de compra:</strong> R$ {{ number_format($produto->preco_de_compra, 2, ',', '.') }}</p>
-
-<p><strong>Preço de venda:</strong> R$ {{ number_format($produto->preco_de_venda, 2, ',', '.') }}</p>
-
-<p><strong>Preço final:</strong> R$ {{ number_format($produto->preco, 2, ',', '.') }}</p>
-
-
 <p><strong>Estoque:</strong> {{ $produto->estoque }}</p>
 
-<p><strong>Forma de pagamento:</strong> {{ $produto->forma_de_pagamento }}</p>
 
 <hr>
 

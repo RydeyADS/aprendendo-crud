@@ -34,10 +34,9 @@
             </p>
 
             <p>
-                Estoque: <strong>{{ $produto->quantidade }}</strong>
+                Estoque: <strong>{{ $produto->estoque }}</strong>
             </p>
 
-            <hr>
 
             <a href="{{ route('produtos.show', $produto) }}">
                 Ver detalhes
@@ -66,3 +65,5 @@
     <p>Nenhum produto cadastrado.</p>
 
 @endif
+
+
